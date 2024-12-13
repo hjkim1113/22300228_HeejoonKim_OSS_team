@@ -14,6 +14,10 @@ export default function Header() {
     navigate('/join');
   };
 
+  const handleHome = () => {
+    navigate('/');
+};
+
   return (
     <>
       <div className="header">
@@ -32,7 +36,7 @@ export default function Header() {
         }
       </div>
       <div className="header1">
-        <h1>SCORETOWN</h1>
+        <h1 onClick={handleHome}>SCORETOWN</h1>
       </div>
     </>
   )

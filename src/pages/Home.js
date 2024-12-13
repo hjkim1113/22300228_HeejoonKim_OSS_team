@@ -12,6 +12,10 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handlePlayer = (player) => {
+    navigate('/player', { state: player });
+  };
+
   const BoardPage = () => {
     navigate('/board');
   };
@@ -116,7 +120,7 @@ export default function App() {
   useEffect(() => {
     const fetchLargestComment = async () => {
       try {
-        const response = await axios.get('https://6743d2afb7464b1c2a65f87a.mockapi.io/comment_player');
+        const response = await axios.get('https://674bbcb571933a4e8855ef5f.mockapi.io/reviews');
         const data = response.data;
         console.log(data);
 
@@ -133,7 +137,7 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <div className="div0">
       <Header />
       <div className="container">
         <div className="section" onClick={BoardPage}>
@@ -145,8 +149,8 @@ export default function App() {
             <p>로딩 중...</p>
           ) : largestIdData ? (
             <>
-              <h3>"{largestIdData.detail}"</h3>
-              <small style={{ opacity: 0.7 }}>{largestIdData.player}/총평</small>
+              <h3>"{largestIdData.review}"</h3>
+              <small>{largestIdData.player}/총평</small>
             </>
           ) : (
             <p>데이터를 가져올 수 없습니다.</p>
@@ -203,10 +207,12 @@ export default function App() {
               <div
                 key={player.id}
                 className="player-card"
+                onClick={() => handlePlayer(player)}
                 style={{
                   backgroundImage: `url(https://score.town/img/positionBG/${player.line}.svg)`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
+                  scale: "100%",
                 }}
               >
                 <img src={`https://st-image.s3.ap-northeast-2.amazonaws.com/Roaster/LCK/${player.img_path}`}  />

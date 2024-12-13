@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../part/Header';
+import Footer from '../part/Footer';
+import "../css/Login.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({ uid: '', psword: '' });
@@ -56,22 +59,45 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="container">
+    <div>
+      <Header />
+      <div className='divLogin'>
+
+        <h2>로그인</h2>
         <form>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="uid">아이디</label>
-            <input className="form-control" type="text" name="uid" id="uid" value={formData.uid} onChange={change} />
+          <div className="formInPutBox">
+            <label htmlFor="uid">아이디</label><br/>
+            <input
+              type="text"
+              name="uid"
+              id="uid"
+              value={formData.uid}
+              onChange={change}
+              style={{ marginTop: '10px', padding: '15px', width: '96%', marginBottom: '10px', background: "rgb(0, 0, 107)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
+            />
           </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="psword">비밀번호</label>
-            <input className="form-control" type="password" name="psword" id="psword" value={formData.psword} onChange={change} />
+          <div className="formInPutBox">
+            <label htmlFor="psword">비밀번호</label><br/>
+            <input
+              type="password"
+              name="psword"
+              id="psword"
+              value={formData.psword}
+              onChange={change}
+              style={{ marginTop: '10px', padding: '15px', width: '96%', marginBottom: '10px', background: "rgb(0, 0, 107)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
+            />
           </div>
-          <button className="btn btn-outline-primary btn-sm" onClick={check}>
-            로그인
+
+          <button 
+            onClick={check}
+            style={{ padding: '7px 12px', backgroundColor: 'rgb(0, 0, 177)', color: 'white', border: 'none', borderRadius: '5px' }}
+          >
+          로그인
           </button>
         </form>
+
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

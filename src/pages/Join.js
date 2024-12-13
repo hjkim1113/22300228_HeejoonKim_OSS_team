@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../part/Header';
+import Footer from '../part/Footer';
 
 export default function Join() {
   const [formData, setFormData] = useState({ uid: '', psword: '', name: '' });
@@ -58,10 +60,17 @@ export default function Join() {
           checkInt = 1;
           break;
         }
+
+        if(udata.name === formData.name){
+          checkInt = 2;
+          break;
+        }
       }
 
       if(checkInt === 1){
         alert('같은 아이디를 사용하는 다른 사용자가 존재합니다 다른 아이디를 입력해 주세요.');
+      } else if(checkInt === 2){
+        alert('같은 닉네임을 사용하는 다른 사용자가 존재합니다 다른 닉네임을 입력해 주세요.');
       } else {
         add();
       }
@@ -73,26 +82,56 @@ export default function Join() {
 
 
   return (
-    <>
-      <div className="container">
+    <div>
+      <Header />
+      <div className='divLogin'>
+
+        <h2>회원가입</h2>
         <form>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="name">이름</label>
-            <input className="form-control" type="text" name="name" id="name" value={formData.name} onChange={change} />
+          <div className="formInPutBox">
+            <label htmlFor="name">닉네임</label><br/>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={formData.name}
+              onChange={change}
+              style={{ marginTop: '10px', padding: '15px', width: '96%', marginBottom: '10px', background: "rgb(0, 0, 107)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
+            />
           </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="uid">아이디</label>
-            <input className="form-control" type="text" name="uid" id="uid" value={formData.uid} onChange={change} />
+          <div className="formInPutBox">
+            <label htmlFor="uid">아이디</label>
+            <input
+             type="text"
+             name="uid"
+             id="uid"
+             value={formData.uid}
+             onChange={change}
+             style={{ marginTop: '10px', padding: '15px', width: '96%', marginBottom: '10px', background: "rgb(0, 0, 107)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
+            />
           </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="psword">비밀번호</label>
-            <input className="form-control" type="password" name="psword" id="psword" value={formData.psword} onChange={change} />
+          <div className="formInPutBox">
+            <label htmlFor="psword">비밀번호</label>
+            <input
+              type="password"
+              name="psword"
+              id="psword"
+              value={formData.psword}
+              onChange={change}
+              style={{ marginTop: '10px', padding: '15px', width: '96%', marginBottom: '10px', background: "rgb(0, 0, 107)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
+            />
           </div>
-          <button className="btn btn-outline-primary btn-sm" onClick={check}>
+
+          <button
+            onClick={check}
+            style={{ padding: '7px 12px', backgroundColor: 'rgb(0, 0, 177)', color: 'white', border: 'none', borderRadius: '5px' }}
+          >
             회원가입
           </button>
         </form>
+
       </div>
-    </>
-  )
+      <Footer />
+    </div>
+  );
 }
