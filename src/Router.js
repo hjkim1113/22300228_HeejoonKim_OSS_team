@@ -8,6 +8,7 @@ import Map from './pages/Map';
 import Board from './pages/Board';
 import BoardWrite from './pages/BoardWrite';
 import BoardDetail from './pages/BoardDetail';
+import BoardEdit from './pages/BoardEdit';
 import Player from './pages/Player';
 
 export default function AppRouter() {
@@ -22,6 +23,7 @@ export default function AppRouter() {
           <Route path="/board" element={<Board />} />
           <Route path="/board/detail" element={<BoardDetail />} />
           <Route path="/board/write" element={<BoardWrite />} />
+          <Route path="/board/edit" element={<BoardEdit />} />
           <Route path="/player" element={<Player />} />
         </Routes>
       </Router>
