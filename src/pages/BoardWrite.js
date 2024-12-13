@@ -69,7 +69,7 @@ export default function Board() {
           value={title}
           onChange={handleTitle}
           placeholder="제목을 작성하세요."
-          style={{ padding: '17px', width: '100%', marginBottom: '10px', background: "rgb(10 10 66)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
+          style={{ padding: '17px', width: 'calc(100% - 30px)', marginBottom: '10px', background: "rgb(10 10 66)", border: "none", borderRadius: "10px", color: "white", fontSize: '15px' }}
         />
 
         <textarea 
@@ -77,7 +77,7 @@ export default function Board() {
           onChange={handleDatail}
           placeholder="상세 내용을 작성하세요." 
           rows="25" 
-          style={{ padding: '17px', width: '100%', marginBottom: '10px', background: "rgb(10 10 66)", border: "none", borderRadius: "10px", color: "white" }} 
+          style={{ padding: '17px', width: 'calc(100% - 30px)', marginBottom: '10px', background: "rgb(10 10 66)", border: "none", borderRadius: "10px", color: "white" }} 
         />
         <button 
           onClick={handleSubmit}

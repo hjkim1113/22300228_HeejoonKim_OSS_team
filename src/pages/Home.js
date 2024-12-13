@@ -10,6 +10,7 @@ export default function App() {
   const [players, setPlayers] = useState([]);
   const [largestIdData, setLargestIdData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [border, setBorder] = useState(null);
   const navigate = useNavigate();
 
   const handlePlayer = (player) => {
@@ -122,7 +123,6 @@ export default function App() {
       try {
         const response = await axios.get('https://674bbcb571933a4e8855ef5f.mockapi.io/reviews');
         const data = response.data;
-        console.log(data);
 
         const maxIdData = data.reduce((max, item) => (parseInt(item.id) > parseInt(max.id) ? item : max), data[0]);
         setLargestIdData(maxIdData);
@@ -136,12 +136,61 @@ export default function App() {
     fetchLargestComment();
   }, []);
 
+  // 데이터 가져오기
+  useEffect(() => {
+    const fetchBorder = async () => {
+      try {
+        const response = await axios.get('https://674734f838c8741641d5d9a2.mockapi.io/board');
+        const data = response.data;
+
+        const maxIdData = data.reduce((max, item) => (parseInt(item.id) > parseInt(max.id) ? item : max), data[0]);
+        setBorder(maxIdData);
+      } catch (error) {
+        console.error(`보더 데이터를 가져오는 중 에러가 발생했습니다: ${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBorder();
+  }, []);
+
+  // 글자수 제한 함수
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  };
+
   return (
     <div className="div0">
       <Header />
       <div className="container">
         <div className="section" onClick={BoardPage}>
-          <h2>전체 게시판</h2>
+          <h2>게시판</h2>
+          {loading ? (
+            <p>로딩 중...</p>
+          ) : border ? (
+            <>
+              <div
+                style={{border:'1px white solid', borderRadius:'10px'}}
+              >
+                <div
+                  style={{margin:'10px', fontSize:'20px'}}
+                >
+                  {truncateText(border.title, 20)}
+                </div>
+                <div
+                  style={{margin:'10px', fontSize:'14px', color:'rgb(177, 177, 177)'}}
+                >
+                  {truncateText(border.detail, 60)}
+                </div>
+              </div>
+            </>
+          ) : (
+            <p>데이터를 가져올 수 없습니다.</p>
+          )}
         </div>
         <div className="section">
           <h2>최근 리뷰</h2>
