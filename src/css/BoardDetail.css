@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   margin: 50px auto 30px auto;
-  min-height: 500px;
+  min-height: 700px;
   padding: 10px 30px 30px 30px;
 }
 
@@ -52,21 +52,19 @@
   font-size: 15px;
 }
 
-/* 수정된 부분 시작 */
 .header-row {
   display: flex;
   align-items: center;
 }
 
 .header-row h2 {
-  flex-grow: 1; /* h2가 왼쪽에 고정됨 */
+  flex-grow: 1;
 }
 
 .button-group {
   display: flex;
-  gap: 20px; /* 버튼 간의 간격을 20px로 설정 */
+  gap: 20px;
 }
-/* 수정된 부분 끝 */
 
 .make2 {
   padding: 12px 24px;

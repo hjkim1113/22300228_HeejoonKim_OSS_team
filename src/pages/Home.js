@@ -164,125 +164,127 @@ export default function App() {
   };
 
   return (
-    <div className="div0">
-      <Header />
-      <div className="container">
-        <div className="section" onClick={BoardPage}>
-          <h2>게시판</h2>
-          {loading ? (
-            <p>로딩 중...</p>
-          ) : border ? (
-            <>
-              <div
-                style={{border:'1px white solid', borderRadius:'10px'}}
-              >
+    <div>
+      <div className="div0">
+        <Header />
+        <div className="container">
+          <div className="section" onClick={BoardPage}>
+            <h2>게시판</h2>
+            {loading ? (
+              <p>로딩 중...</p>
+            ) : border ? (
+              <>
                 <div
-                  style={{margin:'10px', fontSize:'20px'}}
+                  style={{border:'1px white solid', borderRadius:'10px'}}
                 >
-                  {truncateText(border.title, 20)}
+                  <div
+                    style={{margin:'10px', fontSize:'20px'}}
+                  >
+                    {truncateText(border.title, 20)}
+                  </div>
+                  <div
+                    style={{margin:'10px', fontSize:'14px', color:'rgb(177, 177, 177)'}}
+                  >
+                    {truncateText(border.detail, 60)}
+                  </div>
                 </div>
-                <div
-                  style={{margin:'10px', fontSize:'14px', color:'rgb(177, 177, 177)'}}
-                >
-                  {truncateText(border.detail, 60)}
-                </div>
-              </div>
-            </>
-          ) : (
-            <p>데이터를 가져올 수 없습니다.</p>
-          )}
-        </div>
-        <div className="section">
-          <h2>최근 리뷰</h2>
-          {loading ? (
-            <p>로딩 중...</p>
-          ) : largestIdData ? (
-            <>
-              <h3>"{largestIdData.review}"</h3>
-              <small>{largestIdData.player}/총평</small>
-            </>
-          ) : (
-            <p>데이터를 가져올 수 없습니다.</p>
-          )}
-        </div>
-        <div className="section">
-          <div className="section_center">
-            <h2>스토브리그 </h2>
-            <select
-              class="class"
-              value={selectedTeam}
-              onChange={(e) => setSelectedTeam(e.target.value)}
-            >
-              <option value="T1">T1</option>
-              <option value="Gen.G">Gen.G</option>
-              <option value="HLE">HLE</option>
-              <option value="DK">DK</option>
-              <option value="KT">KT</option>
-              <option value="BNK">BNK</option>
-              <option value="KDF">KDF</option>
-              <option value="NS">NS</option>
-              <option value="DRX">DRX</option>
-              <option value="BRO">BRO</option>
-            </select>
+              </>
+            ) : (
+              <p>데이터를 가져올 수 없습니다.</p>
+            )}
           </div>
-          <div
-            style={{
-              borderBottom: `2px solid ${teamColors[selectedTeam]}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px 0",
-            }}
-          >
-            <img
-              className="h-6"
-              src={teamFlags[selectedTeam]}
-              alt="team flag"
-              style={{ height: "2em", verticalAlign: "middle" }}
-            />
-            <h1
+          <div className="section">
+            <h2>최근 리뷰</h2>
+            {loading ? (
+              <p>로딩 중...</p>
+            ) : largestIdData ? (
+              <>
+                <h3>"{largestIdData.review}"</h3>
+                <small>{largestIdData.player}/총평</small>
+              </>
+            ) : (
+              <p>데이터를 가져올 수 없습니다.</p>
+            )}
+          </div>
+          <div className="section">
+            <div className="section_center">
+              <h2>스토브리그 </h2>
+              <select
+                class="class"
+                value={selectedTeam}
+                onChange={(e) => setSelectedTeam(e.target.value)}
+              >
+                <option value="T1">T1</option>
+                <option value="Gen.G">Gen.G</option>
+                <option value="HLE">HLE</option>
+                <option value="DK">DK</option>
+                <option value="KT">KT</option>
+                <option value="BNK">BNK</option>
+                <option value="KDF">KDF</option>
+                <option value="NS">NS</option>
+                <option value="DRX">DRX</option>
+                <option value="BRO">BRO</option>
+              </select>
+            </div>
+            <div
               style={{
-                display: "inline-block",
-                marginLeft: "0.5em",
-                fontSize: "1.5em",
-                fontWeight: "bold",
+                borderBottom: `2px solid ${teamColors[selectedTeam]}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px 0",
               }}
             >
-              {selectedTeam}
-            </h1>
-          </div>
-          <div className="matches1">
-            {players.map((player) => (
-              <div
-                key={player.id}
-                className="player-card"
-                onClick={() => handlePlayer(player)}
+              <img
+                className="h-6"
+                src={teamFlags[selectedTeam]}
+                alt="team flag"
+                style={{ height: "2em", verticalAlign: "middle" }}
+              />
+              <h1
                 style={{
-                  backgroundImage: `url(https://score.town/img/positionBG/${player.line}.svg)`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  scale: "100%",
+                  display: "inline-block",
+                  marginLeft: "0.5em",
+                  fontSize: "1.5em",
+                  fontWeight: "bold",
                 }}
               >
-                <img src={`https://st-image.s3.ap-northeast-2.amazonaws.com/Roaster/LCK/${player.img_path}`}  />
-                <div>
-                  <h3>{player.name}</h3>
+                {selectedTeam}
+              </h1>
+            </div>
+            <div className="matches1">
+              {players.map((player) => (
+                <div
+                  key={player.id}
+                  className="player-card"
+                  onClick={() => handlePlayer(player)}
+                  style={{
+                    backgroundImage: `url(https://score.town/img/positionBG/${player.line}.svg)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    scale: "100%",
+                  }}
+                >
+                  <img src={`https://st-image.s3.ap-northeast-2.amazonaws.com/Roaster/LCK/${player.img_path}`}  />
+                  <div>
+                    <h3>{player.name}</h3>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="section">
-          <h2 onClick={MapPage}>사옥위치</h2>
-          <div
-            id="map"
-            style={{
-              width: "100%",
-              height: "400px",
-              marginTop: "20px",
-              border: "1px solid #ddd",
-            }}
-          ></div>
+          <div className="section">
+            <h2 onClick={MapPage}>사옥위치</h2>
+            <div
+              id="map"
+              style={{
+                width: "100%",
+                height: "400px",
+                marginTop: "20px",
+                border: "1px solid #ddd",
+              }}
+            ></div>
+          </div>
         </div>
       </div>
       <Footer />
